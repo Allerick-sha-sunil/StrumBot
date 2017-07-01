@@ -1,0 +1,166 @@
+/*.header .icon {
+    background: url("/home/home/strumbot/app/src/assets/logo.ico") 
+    no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle; 
+    padding-bottom: 20px;
+}*/
+
+/*Bot*/
+.header .text2{ 
+    font-family: 'Baumans',cursive;
+    font-size: 40px;
+    color: DarkRed;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+}
+
+/*Strum*/
+.header .text1 {
+    font-family: 'Baumans',cursive;
+    font-size: 40px;
+    color: DimGrey;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    padding-left: 20px; 
+}
+
+
+.header .wrap .search {
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+}
+
+.header .wrap .searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid LightSteelBlue ;
+  padding: 5px;
+  height: 24px;
+  border-radius: 5px;
+  outline: none;
+  color: DimGrey;
+}
+
+.header .wrap .searchTerm:focus{
+  color: Grey;
+}
+
+.header .wrap .searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid LightSteelBlue ;
+  background: LightSteelBlue ;
+  text-align: center;
+  font-style: italic;
+  padding-left: 5px;
+  color: LightSteelBlue ;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: fixed;
+  display: inline-block;
+  vertical-align: 50%;
+  right: 200px;
+}
+
+.header .login{
+    font-family: 'Baumans',cursive;
+    border: 1.5px solid DarkRed;
+    background-color: White;
+    color: DarkRed;
+    padding: 8px 18px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    position: fixed;
+    right: 40px;
+}
+
+.header .login:hover {
+    border: 1px solid Maroon;
+    background-color: DarkRed;
+    color: White;
+}
+
+.image{
+    background: url("/home/home/strum/app/src/assets/image.png")
+    no-repeat;
+    width: screen.width;
+    position: relative;
+    height: 562px;
+    opacity: 0.8;
+}
+
+/*Explore. Learn. Share*/
+.image .text1{ 
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px;
+    color: White;
+    position: absolute;
+    right: 40%;
+    padding-top: 25px;
+}
+
+/*Get notes for your favourite songs and start playing*/
+.image .text2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    color: White;
+    position: absolute;
+    display: inline-block;
+    right: 30%;
+    top: 10%;
+    padding-top: 20px;
+    padding-left: 20px; 
+}
+
+.image .text3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    color: White;
+    position: absolute;
+    right: 30%;
+    bottom: 8%;
+    padding-top: 20px;
+    padding-left: 20px; 
+}
+
+.image .signup{
+    font-family: 'Baumans',cursive;
+    border: 1px solid Maroon;
+    background-color: DarkRed;
+    color: White;
+    padding: 8px 18px;
+    text-align: center;
+    display: inline-block;
+    font-size: 25px;
+    border-radius: 8px;
+    position: absolute;
+    right: 50%;
+    bottom: 15%;
+}
+
+.image .signup:hover {
+    border: 1.5px solid DarkRed;
+    background-color: White;
+    color: DarkRed;
+}

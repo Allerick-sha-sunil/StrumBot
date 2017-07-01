@@ -1,0 +1,2 @@
+--> StrumBot is a web-app that caters to song-note needs of music students. 
+--> It's a community where students can read,share and rate music notes.
