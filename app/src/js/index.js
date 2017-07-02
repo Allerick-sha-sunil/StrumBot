@@ -59,7 +59,7 @@ $(document).ready(function(){
 			userId = data.hasura_id;
 
 			//goto dashboard
-			window.location.href = "http://localhost:8080/dashboard";
+			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 			//set cookie
 			var d = new Date();
