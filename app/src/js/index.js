@@ -49,17 +49,14 @@ $(document).ready(function(){
 			url: 'http://auth.c100.hasura.me/login',
 			headers:{"Content-Type" : "application/json"},
 			data: JSON.stringify({
-				"username": $("#username").val(),	
-				"password": $("#password").val()
+				"username": $("#L_username").val(),	
+				"password": $("#L_password").val()
 			})
 		}).done(function(data){
 
 			alert("User Logged In");
 			token = data.auth_token;
 			userId = data.hasura_id;
-
-			//goto dashboard
-			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 			//set cookie
 			var d = new Date();
@@ -68,6 +65,9 @@ $(document).ready(function(){
 			var expires = "expires="+ d.toUTCString();
 			//set cookie
 			document.cookie = 'cookie_name'+"="+ token +";"+ expires + ";path=/";
+
+			//goto dashboard
+			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 		}).fail(function(data){
 
