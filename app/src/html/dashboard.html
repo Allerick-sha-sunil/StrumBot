@@ -15,28 +15,51 @@
     <link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/font-awesome-ie7.css" rel="stylesheet">
+
+    <style type="text/css">
+      .spacing-b{
+        padding-bottom: 20px;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   </head>
 
   <body>
 
-    <div class="container">
+    <div class="container" style="border: 5px">
 
       <div class="row">
 
         <div class="site-header spacing-t">
 
           <!-- Site Title -->
-          <div class="col-md-2">
+          <div class="col-md-3">
               <div class="site-name spacing-b">
                 <h1> STRUMBOT</h1>
                 <h6>Search, Rate and Share notes</h6>
               </div>
           </div>
 
-          <!-- Search Bar -->
-          <div class="col-md-10">
+          <div class="col-md-2" style="padding-top: 20px">
+           <nav class="navbar pull-right" role="navigation">
+              <p style="color: Grey">Welcome user!</p>
+            </nav>
+          </div>        
+
+          <!-- Write -->
+          <div class="col-md-1" style="padding-top: 7px;">
             <nav class="navbar pull-right" role="navigation">
-            <button class="btn btn-default" style="height: 45px; vertical-align: middle"><i class="glyphicon glyphicon-pencil" style="padding-bottom: 14px; height: 25px;"></i></button>
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button title="Write" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-pencil" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="col-md-5">
+            <nav class="navbar pull-right" role="navigation">
             <form class="navbar-form" role="search">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
@@ -47,10 +70,63 @@
             </form>
             </nav>
           </div>
+          </div>
+
+          <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+              <div style="display: block;vertical-align: middle;text-align: center;">
+                <button class="btn btn-default" style="height: 45px; vertical-align: middle;">Log Out</button>
+              </div>
+            </nav>
+          </div>
 
         </div>
+
+        <div>
+          <p style="padding-left: 8px; background-color: Grey; color: White;">Dashboard</p>
+        </div>
+
       </div>
-    </div>
+
+      <div class="container" style="padding-top: 40px">
+
+        <div class="row">
+
+          <div class="col-md-6">
+          <h3 style="color: #e24f43">Recents</h3>
+            <div class="list-group">
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">First item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Second item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Third item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Fourth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Fifth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Sixth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Seventh item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Eightth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Ninth item</a>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+          <h3 style="color: #e24f43">Your Content</h3>
+            <div class="list-group">
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">First item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Second item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Third item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Fourth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Fifth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Sixth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Seventh item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Eightth item</a>
+              <a href="#" style="text-transform: capitalize;" class="list-group-item">Ninth item</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div> 
+
+      <script type="text/javascript" src="/js/index.js"></script>
 
   </body>
 </html>

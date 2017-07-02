@@ -77,6 +77,8 @@ img{}
 }
 
 
+
+
 /*========================================
   Custom Classes
 ========================================*/
@@ -95,9 +97,6 @@ img{}
 }
 .spacing-t{
 	padding-top: 30px;
-}
-.spacing-b{
-	padding-bottom: 30px;
 }
 .spacing-t-b{
 	padding-top: 30px;
