@@ -108,7 +108,7 @@ $(document).ready(function(){
 
 	});
 
-	$("#notes").click(function(e){
+	$("#search").click(function(e){
 
 	//window.location.href = "http://localhost:8080/search";
 	window.location.href = "http://strumbot.c100.hasura.me/search";
