@@ -27,7 +27,7 @@ app.get('/notes', function (req, res) {
 });
 
 app.get('/search', function (req, res) {
-    res.sendFile('html/notes.html',{root});
+    res.sendFile('html/search.html',{root});
 });
 
 app.listen(8080, function () {
