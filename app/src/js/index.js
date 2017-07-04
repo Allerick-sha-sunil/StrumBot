@@ -29,7 +29,8 @@ $(document).ready(function(){
 
 			//user logged in
 			//alert("User Registered");
-			window.location.href = "http://localhost:8080/dashboard";
+			//window.location.href = "http://localhost:8080/dashboard";
+			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 		}).fail(function(data){
 
@@ -53,8 +54,8 @@ $(document).ready(function(){
 			})
 		}).done(function(data){
 			//goto dashboard
-			//window.location.href = "http://strumbot.c100.hasura.me/dashboard";
-			window.location.href = "http://localhost:8080/dashboard";
+			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
+			//window.location.href = "http://localhost:8080/dashboard";
 
 			localStorage.setItem('token', JSON.stringify(data.auth_token));
 			//alert(localStorage.getItem('token'));
@@ -77,7 +78,8 @@ $(document).ready(function(){
         if(request.readyState === XMLHttpRequest.DONE) {
             if(request.status ===200) {
                 //alert('Logged out successfully');
-                window.location.href = "http://localhost:8080";
+                //window.location.href = "http://localhost:8080";
+                window.location.href = "http://strumbot.c100.hasura.me";
             }
             else if(request.status===500){
                 alert('Something went wrong on the server');
@@ -94,19 +96,22 @@ $(document).ready(function(){
 
 	$("#write").click(function(e){
 
-	window.location.href = "http://localhost:8080/write";
+	//window.location.href = "http://localhost:8080/write";
+	window.location.href = "http://strumbot.c100.hasura.me/write";
 
 	});
 
 	$("#notes").click(function(e){
 
-	window.location.href = "http://localhost:8080/notes";
+	//window.location.href = "http://localhost:8080/notes";
+	window.location.href = "http://strumbot.c100.hasura.me/notes";
 
 	});
 
 	$("#notes").click(function(e){
 
-	window.location.href = "http://localhost:8080/search";
+	//window.location.href = "http://localhost:8080/search";
+	window.location.href = "http://strumbot.c100.hasura.me/search";
 
 	});
 
