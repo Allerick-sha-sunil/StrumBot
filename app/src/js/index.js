@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	//password confirmation
 	$('#password, #password_confirmation').on('keyup', function () {
   		if ($('#password').val() == $('#password_confirmation').val()) {
@@ -29,7 +28,7 @@ $(document).ready(function(){
 		}).done(function(){
 
 			//user logged in
-			alert("User Registered");
+			//alert("User Registered");
 			window.location.href = "http://localhost:8080/dashboard";
 
 		}).fail(function(data){
@@ -53,21 +52,12 @@ $(document).ready(function(){
 				"password": $("#L_password").val()
 			})
 		}).done(function(data){
-
-			alert("User Logged In");
-			token = data.auth_token;
-			userId = data.hasura_id;
-
-			//set cookie
-			var d = new Date();
-			d.setTime(d.getTime() + (1*24*60*60*1000));
-			//expiry time
-			var expires = "expires="+ d.toUTCString();
-			//set cookie
-			document.cookie = 'cookie_name'+"="+ token +";"+ expires + ";path=/";
-
 			//goto dashboard
-			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
+			//window.location.href = "http://strumbot.c100.hasura.me/dashboard";
+			window.location.href = "http://localhost:8080/dashboard";
+
+			localStorage.setItem('token', JSON.stringify(data.auth_token));
+			//alert(localStorage.getItem('token'));
 
 		}).fail(function(data){
 
@@ -75,5 +65,50 @@ $(document).ready(function(){
 			alert("fail :"+JSON.parse(data.responseText).message);
 		});
 	});
+
+	$("#logout").click(function(e){
+
+		e.preventDefault();
+		var token=JSON.parse(localStorage.getItem('token'));
+		//alert(token);
+		
+		var request = new XMLHttpRequest();
+		   request.onreadystatechange = function() {
+        if(request.readyState === XMLHttpRequest.DONE) {
+            if(request.status ===200) {
+                //alert('Logged out successfully');
+                window.location.href = "http://localhost:8080";
+            }
+            else if(request.status===500){
+                alert('Something went wrong on the server');
+            }
+        }
+    };
+		request.open('POST' , 'http://auth.c100.hasura.me/user/logout', true);
+		request.setRequestHeader('Content-Type','application/json');
+		request.setRequestHeader('Authorization','Bearer '+ token);
+		request.withCredentials = true;
+		request.send(null);
+
+	});
+
+	$("#write").click(function(e){
+
+	window.location.href = "http://localhost:8080/write";
+
+	});
+
+	$("#notes").click(function(e){
+
+	window.location.href = "http://localhost:8080/notes";
+
+	});
+
+	$("#notes").click(function(e){
+
+	window.location.href = "http://localhost:8080/search";
+
+	});
+
 
 });

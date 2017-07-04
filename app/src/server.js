@@ -18,6 +18,18 @@ app.get('/dashboard', function (req, res) {
     res.sendFile('html/dashboard.html',{root});
 });
 
+app.get('/write', function (req, res) {
+    res.sendFile('html/write.html',{root});
+});
+
+app.get('/notes', function (req, res) {
+    res.sendFile('html/notes.html',{root});
+});
+
+app.get('/search', function (req, res) {
+    res.sendFile('html/notes.html',{root});
+});
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
