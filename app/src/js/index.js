@@ -12,10 +12,9 @@ $(document).ready(function(){
 
 	//On Register Click
 	$("#Register").click(function(e){
-
 		e.preventDefault();
 
-		//ajax request to auth - SIGNUP
+		//request to auth - SIGNUP
 		$.ajax({
 			method: "POST",
 			url: 'http://auth.c100.hasura.me/signup',
@@ -25,19 +24,51 @@ $(document).ready(function(){
 				"email"	  : $("#email").val(),	
 				"password": $("#password").val()
 			})
-		}).done(function(){
-
-			//user logged in
-			//alert("User Registered");
-			//window.location.href = "http://localhost:8080/dashboard";
-			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
-
-		}).fail(function(data){
-
-			//Sign up failed
+		}).done(function(data){
+			alert("SignUp done");
+			//to add user to profile table
+			$.ajax({
+ 				url: 'http://auth.c100.hasura.me/user/account/info',
+ 				method: 'post',
+ 				headers: {
+ 				'Authorization': 'Bearer ' + data.auth_token,
+ 				'Content-Type': 'application/json'
+ 				}
+ 				}).done(function(data){
+ 					localStorage.setItem('username', JSON.stringify(data.username));
+    				$.ajax({
+		 				url: 'http://data.c100.hasura.me/v1/query',
+		 				method: 'post',
+		 				headers: {
+		 				'Authorization': 'Bearer ' + data.auth_token,
+		 				'Content-Type': 'application/json'
+		 				},
+		 				data: JSON.stringify({
+		 					"type": "insert",
+		 					"args": {
+		 								"table": "profile",
+		 								"objects": [
+		 								{
+		 									"user_id": data.hasura_id.toString(),
+		 									"username": data.username,
+		 									"email":data.email
+		 								}
+		 								]
+		 							}
+		 				})
+ 					}).done(function(data){
+		    			alert("Registration successfull! Login to continue...");
+						
+					}).fail(function(data) {
+						alert("fail :"+JSON.parse(data.responseText).message);
+					})
+				}).fail(function(data){
+					//Sign up failed
+					alert("fail :"+JSON.parse(data.responseText).message);
+				})
+		}).fail(function(data) {
 			alert("fail :"+JSON.parse(data.responseText).message);
 		});
-
 	});
 
 	$("#Login").click(function(e){
@@ -54,12 +85,25 @@ $(document).ready(function(){
 			})
 		}).done(function(data){
 			//goto dashboard
-			window.location.href = "http://strumbot.c100.hasura.me/dashboard";
-			//window.location.href = "http://localhost:8080/dashboard";
+			//window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 			localStorage.setItem('token', JSON.stringify(data.auth_token));
 			//alert(localStorage.getItem('token'));
-
+			$.ajax({
+ 				url: 'http://auth.c100.hasura.me/user/account/info',
+ 				method: 'post',
+ 				headers: {
+ 				'Authorization': 'Bearer ' + data.auth_token,
+ 				'Content-Type': 'application/json'
+ 				}
+ 				}).done(function(data){
+ 					localStorage.setItem('username', JSON.stringify(data.username));
+ 					localStorage.setItem('id', JSON.stringify(data.hasura_id));
+ 					window.location.href = "http://localhost:8080/dashboard";
+ 				}).fail(function(data){
+			//Sign up failed
+			alert("fail :"+JSON.parse(data.responseText).message);
+		})			
 		}).fail(function(data){
 
 			//Sign up failed
@@ -67,19 +111,20 @@ $(document).ready(function(){
 		});
 	});
 
+
 	$("#logout").click(function(e){
 
 		e.preventDefault();
 		var token=JSON.parse(localStorage.getItem('token'));
-		//alert(token);
+		alert(token);
 		
 		var request = new XMLHttpRequest();
 		   request.onreadystatechange = function() {
         if(request.readyState === XMLHttpRequest.DONE) {
             if(request.status ===200) {
                 //alert('Logged out successfully');
-                //window.location.href = "http://localhost:8080";
-                window.location.href = "http://strumbot.c100.hasura.me";
+                window.location.href = "http://localhost:8080";
+                //window.location.href = "http://strumbot.c100.hasura.me";
             }
             else if(request.status===500){
                 alert('Something went wrong on the server');
@@ -95,10 +140,7 @@ $(document).ready(function(){
 	});
 
 	$("#write").click(function(e){
-
-	//window.location.href = "http://localhost:8080/write";
-	window.location.href = "http://strumbot.c100.hasura.me/write";
-
+	window.location.href = "http://localhost:8080/write";;
 	});
 
 	$("#notes").click(function(e){
@@ -115,5 +157,11 @@ $(document).ready(function(){
 
 	});
 
+	$("#dash").click(function(e){
+
+	window.location.href = "http://localhost:8080/dashboard";
+	//window.location.href = "http://strumbot.c100.hasura.me/search";
+
+	});
 
 });

@@ -26,21 +26,141 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/respond.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    -->
 
   </head>
 
   <body>
 
-      <h1>Coming soon!</h1>
+      <div class="container" style="border: 5px">
+
+      <div class="row">
+
+        <div class="site-header spacing-t">
+
+          <!-- Site Title -->
+          <div class="col-md-3">
+              <div class="site-name spacing-b">
+                <h1> STRUMBOT</h1>
+                <h6>Search, Rate and Share notes</h6>
+              </div>
+          </div>
+      
+
+          <!-- Dashboard -->
+          <div class="col-md-3" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button id="dash" title="Dashboard" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-th-large" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="col-md-5">
+            <nav class="navbar pull-right" role="navigation">
+            <form class="navbar-form" role="search">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                  <div class="input-group-btn">
+                    <button id="search" class="btn btn-default" type="submit" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
+                  </div>
+                </div>
+            </form>
+            </nav>
+          </div>
+          </div>
+
+          <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+              <div style="display: block;vertical-align: middle;text-align: center;">
+                <button id="logout" class="btn btn-default" style="height: 45px; vertical-align: middle;">Log Out</button>
+              </div>
+            </nav>
+          </div>
+
+        </div>
+
+        <!--CKEDITOR Plugin-->
+        <div class="col-md-8">
+          <form>
+            <textarea cols="80" id="editor1" name="editor1" rows="10" >Write notes here!</textarea>
+            <script>
+              CKEDITOR.replace( 'editor1', {
+                width: 700,
+                height: 400
+            } );
+            </script>
+          </form>
+        </div>
+
+        <div class="col-md-4">
+        <h2>Song Details</h2>
+          <form>
+            <div class="form-group">
+              <input type="name" placeholder="Song name(required)" class="form-control input-lg" id="name" required>
+            </div>
+            <div class="form-group">
+              <input type="artist" placeholder="Main Artist" class="form-control input-lg" id="artist">
+            </div>
+            <div class="form-group">
+              <input type="lang" placeholder="Language" class="form-control input-lg" id="lang">
+            </div>
+            <div class="form-group">
+              <input type="link" placeholder="Youtube link to song or a played piece" class="form-control input-lg" class="form-control" id="link">
+            </div>
+            <div style="padding-bottom: 20px">
+              <button id="post" class="btn btn-primary btn-block btn-lg" tabindex="7">Post</button>
+            </div>
+          </form>
+          <p> Make your notes understandable by adding lyrics to them. Look at this for reference. Remember that good notes get good Ratings!</p>
+        </div>
+
+    </div>
 
       <script type="text/javascript" src="/js/index.js"></script>
+      <script>
+      $("#post").click(function(e){
+      alert("Please Fill All Required Field");
+      return false;
+      }
+        var notes = CKEDITOR.instances.editor1.getData();
+        $.ajax({
+            url: 'http://data.c100.hasura.me/v1/query',
+            method: 'post',
+            headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+            'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({
+              "type": "insert",
+              "args": {
+                    "table": "article",
+                    "objects": [
+                    {
+                      "user_id": JSON.parse(localStorage.getItem('id')),
+                      "notes": notes,
+                      "name": $("#name").val(),
+                      "artist": $("#artist").val(),
+                      "language": $("#lang").val(),
+                      "link": $("#link").val()
+                    }
+                    ]
+                  }
+            })
+          }).done(function(data){
+              alert("Inserted");
+            
+          }).fail(function(data) {
+            alert("fail :"+JSON.parse(data.responseText).message);
+          })
+      });
+    </script>
 	
   </body>
 </html>

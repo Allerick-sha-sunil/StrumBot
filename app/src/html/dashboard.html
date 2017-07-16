@@ -23,6 +23,61 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      window.onload = function(){
+           var refButton = document.getElementById("welcomeuser");
+           refButton.innerHTML="Hi "+ JSON.parse(localStorage.getItem('username'))+"!";
+        };
+      $.ajax({
+           url: 'http://data.c100.hasura.me/v1/query',
+           method: 'post',
+           headers: {
+           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+           'Content-Type': 'application/json'
+           },
+           data: JSON.stringify({
+           "type": "select",
+           "args": {
+           "table": "article",
+           "columns": ["name","created"],
+           "order_by" : "created"
+           }
+           })
+           }).done(function(data) {
+           //alert("Appending!");
+           var append_data = "";
+           for (var i = 0; i<data.length; i++ ) {
+           var append_data = append_data.concat('<a href="notes" style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
+           }
+           var temp = document.getElementById("recents");
+           temp.innerHTML=append_data;
+         }); 
+      $.ajax({
+           url: 'http://data.c100.hasura.me/v1/query',
+           method: 'post',
+           headers: {
+           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+           'Content-Type': 'application/json'
+           },
+           data: JSON.stringify({
+           "type": "select",
+           "args": {
+           "table": "article",
+           "columns": ["name","created"],
+           "where": {"user_id": JSON.parse(localStorage.getItem('id'))},
+           "order_by" : "created"
+           }
+           })
+           }).done(function(data) {
+           //alert("Appending!");
+           var append_data = "";
+           for (var i = 0; i<data.length; i++ ) {
+           var append_data = append_data.concat('<a href="notes" style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
+           }
+           var temp = document.getElementById("content");
+           temp.innerHTML=append_data;
+          });    
+    </script>
 
   </head>
 
@@ -44,7 +99,7 @@
 
           <div class="col-md-2" style="padding-top: 20px">
            <nav class="navbar pull-right" role="navigation">
-              <p style="color: Grey">Welcome user!</p>
+              <p id="welcomeuser">Welcome user</p>
             </nav>
           </div>        
 
@@ -94,31 +149,13 @@
 
           <div class="col-md-6">
           <h3 style="color: #e24f43">Recents</h3>
-            <div class="list-group">
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">First item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Second item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Third item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Fourth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Fifth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Sixth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Seventh item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Eightth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Ninth item</a>
+            <div id="recents" class="list-group">
             </div>
           </div>
 
           <div class="col-md-6">
           <h3 style="color: #e24f43">Your Content</h3>
-            <div class="list-group">
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">First item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Second item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Third item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Fourth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Fifth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Sixth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Seventh item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Eightth item</a>
-              <a href="notes" style="text-transform: capitalize;" class="list-group-item">Ninth item</a>
+            <div id="content" class="list-group">
             </div>
           </div>
 
