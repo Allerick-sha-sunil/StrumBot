@@ -34,11 +34,156 @@
     <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     -->
 
+    <script type="text/javascript">
+      $(function(){
+        $('#stars').click(function(){
+          var objOff = $(this).offset();
+          var x = objOff.left;
+          var posx = event.pageX;
+          var newX = posx - x;
+          var w = $('#stars').width();
+          var percentrating = newX/w;
+          rating = w * percentrating;
+          if($('#rating').length){
+            $('#rating').width(rating);
+          }else{
+             $('#stars').append("<div id='rating'/>");
+          $('#rating').css({width: rating});
+          }
+          var cleanpercent = percentrating + " ";
+          cleanpercent = cleanpercent.slice(2, 4)/10;
+          
+          $('#rating_number').text(cleanpercent + "/10");
+        })
+      });
+
+      window.onload=function(){
+        //localStorage.setItem('note_name','`+x+`');
+        //alert(localStorage.getItem('note_name'));
+        $.ajax({
+           url: 'http://data.c100.hasura.me/v1/query',
+           method: 'post',
+           headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+           'Content-Type': 'application/json'
+           },
+           data: JSON.stringify({
+           "type": "select",
+           "args": {
+           "table": "article",
+           "columns": ["name","created"],
+           "where": {"name":"because"}
+           }
+           })
+           }).done(function(data) {
+           //alert("Appending!");
+           var temp1 = document.getElementById("title");
+           temp1.innerHTML=data[0].name;
+           alert(data[0].name);
+          });
+      }; 
+
+
+    </script>
+
   </head>
 
   <body>
 
-      <h1>Coming soon!</h1>
+      <div class="container" style="border: 5px">
+
+      <div class="row">
+
+        <div class="site-header spacing-t">
+
+          <!-- Site Title -->
+          <div class="col-md-3">
+              <div class="site-name spacing-b">
+                <h1> STRUMBOT</h1>
+                <h6>Search, Rate and Share notes</h6>
+              </div>
+          </div>
+      
+
+          <!-- Dashboard -->
+          <div class="col-md-2" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button id="dash" title="Dashboard" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-th-large" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+           <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button id="write" title="Write" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-pencil" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="col-md-5">
+            <nav class="navbar pull-right" role="navigation">
+            <form class="navbar-form" role="search">
+              <div class="input-group">
+                <input id="search_text" type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                  <div class="input-group-btn">
+                    <button id="search" class="btn btn-default" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
+                  </div>
+                </div>
+            </form>
+            </nav>
+          </div>
+          </div>
+
+          <script>
+            $("#search").click(function(e){
+              e.preventDefault();
+              var temp=$("#search_text").val();
+              localStorage.setItem('search_text',temp);
+              window.location.href = "http://localhost:8080/search";
+              //window.location.href = "http://strumbot.c100.hasura.me/search";
+            });
+          </script>
+
+          <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+              <div style="display: block;vertical-align: middle;text-align: center;">
+                <button id="logout" class="btn btn-default" style="height: 45px; vertical-align: middle;">Log Out</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <h2 id="title"></h2>
+          <p id="author" style="padding-bottom: 20px"></p>
+          <p id="notes"></p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Artist</h4>
+          <p id="artist"></p>
+          <h4>Language</h4>
+          <p id="artist"></p>
+          <h4>Link</h4>
+          <a id="link"></a>
+          <h4 style="padding-top: 15px">Posted on</h4>
+          <p id="time"></p>
+          <h4>Average Rating</h4>
+          <p id="rating1"></p>
+          <h4 style="padding-top: 20px">Your Rating</h4>
+          <div id = 'wrap'>
+            <div id = 'stars'>
+              <span id ='rating_number'>0</span>
+            </div>
+          </div>
+          <p>Click on the above bar to rate!</p>
+        </div>
+
+
+      </div>
 
       <script type="text/javascript" src="/js/index.js"></script>
 	

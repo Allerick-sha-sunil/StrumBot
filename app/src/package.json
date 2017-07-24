@@ -8,6 +8,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "ajax-request": "^1.2.3",
+    "express": "^4.14.0",
+    "express-ajax": "^1.0.2"
   }
 }

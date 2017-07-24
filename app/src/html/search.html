@@ -26,6 +26,41 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+    window.onload=function(){
+      var temp=localStorage.getItem('search_text');
+      alert(temp);
+      $.ajax({
+           url: 'http://data.c100.hasura.me/v1/query',
+           method: 'post',
+           headers: {
+           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+           'Content-Type': 'application/json'
+           },
+           data: JSON.stringify({
+           "type": "select",
+           "args": {
+           "table": "article",
+           "columns": ["name","created"],
+           "where": {"name": temp},
+           "order_by" : "created"
+           }
+           })
+           }).done(function(data) {
+           //alert("Appending!");
+           var temp2 = document.getElementById("tell");
+           temp2.innerHTML="You've Searched for '"+localStorage.getItem('search_text')+"'";
+           alert(data);
+           var append_data = "";
+           for (var i = 0; i<data.length; i++ ) {
+           var append_data = append_data.concat('<a href=/'+data[i].id+' style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
+           }
+           var temp1 = document.getElementById("content");
+           temp1.innerHTML=append_data;
+          });
+        };    
+    </script>
     <!--
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/html5shiv.js"></script>
@@ -38,9 +73,86 @@
 
   <body>
 
-      <h1>Coming soon!</h1>
+      <div class="container" style="border: 5px">
+
+      <div class="row">
+
+        <div class="site-header spacing-t">
+
+          <!-- Site Title -->
+          <div class="col-md-3">
+              <div class="site-name spacing-b">
+                <h1> STRUMBOT</h1>
+                <h6>Search, Rate and Share notes</h6>
+              </div>
+          </div>
+      
+
+          <!-- Dashboard -->
+          <div class="col-md-2" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button id="dash" title="Dashboard" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-th-large" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+           <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+            <div style="display: block;vertical-align: middle;text-align: center;">
+            <button id="write" title="Write" class="btn btn-default" style="height: 45px; vertical-align: middle;"><i class="glyphicon glyphicon-pencil" style="padding-bottom: 14px; height: 25px;"></i></button>
+            </div>
+            </nav>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="col-md-5">
+            <nav class="navbar pull-right" role="navigation">
+            <form class="navbar-form" role="search">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                  <div class="input-group-btn">
+                    <button id="search" class="btn btn-default" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
+                  </div>
+                </div>
+            </form>
+            </nav>
+          </div>
+          </div>
+
+          <script>
+            $("#search").click(function(e){
+              e.preventDefault();
+              var temp=$("#search_text").val();
+              localStorage.setItem('search_text',temp);
+              //window.location.href = "http://localhost:8080/search";
+              window.location.href = "http://strumbot.c100.hasura.me/search";
+            });
+          </script>
+
+          <div class="col-md-1" style="padding-top: 7px;">
+            <nav class="navbar pull-right" role="navigation">
+              <div style="display: block;vertical-align: middle;text-align: center;">
+                <button id="logout" class="btn btn-default" style="height: 45px; vertical-align: middle;">Log Out</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <div>
+          <p style="padding-left: 8px; background-color: Grey; color: White;">Search Results</p>
+        </div>
+
+        <div class="container" style="padding-top: 40px">
+          <div class="row">       
+            <h3 id="tell" style="color: #e24f43"></h3>
+              <div id="content" class="list-group"></div>
+          </div>
+        </div> 
+
+    </div>
 
       <script type="text/javascript" src="/js/index.js"></script>
-	
+  
   </body>
 </html>

@@ -380,3 +380,37 @@ border-bottom-color: #eee;
 	border-radius: 5px;
 }
 
+html, body, #wrap{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#wrap{
+  
+}
+
+#stars{
+  background-color: LightGrey;
+  margin: 0px auto;
+  border: 1px;
+  border-color: #222;
+  height: 50px;
+  cursor: pointer;
+}
+
+#rating_number{
+	font: 20px 'Helvetica';
+  margin-top: 10px;
+  margin-left: 50px;
+  position: fixed;
+  text-align: center;
+  font-weight: bold;
+}
+
+#rating{
+	height: 50px;
+  background-color: rgba(255, 215, 55, 1);
+}
+

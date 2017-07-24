@@ -23,11 +23,14 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-      window.onload = function(){
-           var refButton = document.getElementById("welcomeuser");
-           refButton.innerHTML="Hi "+ JSON.parse(localStorage.getItem('username'))+"!";
-        };
+    <script type="text/javascript">
+      window.onload=function(){
+      var username=localStorage.getItem('username');
+      username=username.replace(/['"]+/g, '');
+      var temp1 = document.getElementById("welcomeuser");
+      temp1.innerHTML="Welcome "+username+"!";
+      var id=localStorage.getItem('id');
+      //alert(id);
       $.ajax({
            url: 'http://data.c100.hasura.me/v1/query',
            method: 'post',
@@ -39,20 +42,19 @@
            "type": "select",
            "args": {
            "table": "article",
-           "columns": ["name","created"],
+           "columns": ["id","name","created"],
            "order_by" : "created"
            }
            })
            }).done(function(data) {
-           //alert("Appending!");
            var append_data = "";
            for (var i = 0; i<data.length; i++ ) {
-           var append_data = append_data.concat('<a href="notes" style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
+           var append_data = append_data.concat('<a href=/'+data[i].id+' style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
            }
-           var temp = document.getElementById("recents");
-           temp.innerHTML=append_data;
-         }); 
-      $.ajax({
+           var temp1 = document.getElementById("recents");
+           temp1.innerHTML=append_data;
+          });
+        $.ajax({
            url: 'http://data.c100.hasura.me/v1/query',
            method: 'post',
            headers: {
@@ -63,21 +65,24 @@
            "type": "select",
            "args": {
            "table": "article",
-           "columns": ["name","created"],
-           "where": {"user_id": JSON.parse(localStorage.getItem('id'))},
+           "columns": ["id","name","created"],
+           "where":{"user_id": id},
            "order_by" : "created"
            }
            })
            }).done(function(data) {
            //alert("Appending!");
+           //alert(data.length);
            var append_data = "";
            for (var i = 0; i<data.length; i++ ) {
-           var append_data = append_data.concat('<a href="notes" style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
+                var append_data = append_data.concat('<a href=/'+data[i].id+' style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>');
            }
-           var temp = document.getElementById("content");
-           temp.innerHTML=append_data;
-          });    
+           var temp1 = document.getElementById("content");
+           temp1.innerHTML=append_data;
+          });
+        }; 
     </script>
+     
 
   </head>
 
@@ -99,7 +104,7 @@
 
           <div class="col-md-2" style="padding-top: 20px">
            <nav class="navbar pull-right" role="navigation">
-              <p id="welcomeuser">Welcome user</p>
+              <p id="welcomeuser"></p>
             </nav>
           </div>        
 
@@ -117,15 +122,25 @@
             <nav class="navbar pull-right" role="navigation">
             <form class="navbar-form" role="search">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                <input id="search_text" type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
                   <div class="input-group-btn">
-                    <button id="search" class="btn btn-default" type="submit" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
+                    <button id="search" class="btn btn-default" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
                   </div>
                 </div>
             </form>
             </nav>
           </div>
           </div>
+
+          <script type="text/javascript">
+            $("#search").click(function(e){
+              e.preventDefault();
+              var temp=$("#search_text").val();
+              localStorage.setItem('search_text',temp);
+              //window.location.href = "http://localhost:8080/search";
+              window.location.href = "http://strumbot.c100.hasura.me/search";
+            });
+          </script>
 
           <div class="col-md-1" style="padding-top: 7px;">
             <nav class="navbar pull-right" role="navigation">

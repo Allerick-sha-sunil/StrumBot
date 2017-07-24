@@ -1,3 +1,9 @@
+function redirect(elem) {
+    var id = $(elem).attr("id");
+    alert(id);
+    window.location.href = "http://localhost:8080/"+id;
+}
+
 $(document).ready(function(){
 	//password confirmation
 	$('#password, #password_confirmation').on('keyup', function () {
@@ -86,7 +92,7 @@ $(document).ready(function(){
 		}).done(function(data){
 			//goto dashboard
 			//window.location.href = "http://strumbot.c100.hasura.me/dashboard";
-
+			localStorage.setItem('id', JSON.stringify(data.hasura_id));
 			localStorage.setItem('token', JSON.stringify(data.auth_token));
 			//alert(localStorage.getItem('token'));
 			$.ajax({
@@ -99,7 +105,8 @@ $(document).ready(function(){
  				}).done(function(data){
  					localStorage.setItem('username', JSON.stringify(data.username));
  					localStorage.setItem('id', JSON.stringify(data.hasura_id));
- 					window.location.href = "http://localhost:8080/dashboard";
+ 					//window.location.href = "http://localhost:8080/dashboard";
+ 					window.location.href = "http://strumbot.c100.hasura.me/dashboard";
  				}).fail(function(data){
 			//Sign up failed
 			alert("fail :"+JSON.parse(data.responseText).message);
@@ -116,15 +123,15 @@ $(document).ready(function(){
 
 		e.preventDefault();
 		var token=JSON.parse(localStorage.getItem('token'));
-		alert(token);
+		//alert(token);
 		
 		var request = new XMLHttpRequest();
 		   request.onreadystatechange = function() {
         if(request.readyState === XMLHttpRequest.DONE) {
             if(request.status ===200) {
                 //alert('Logged out successfully');
-                window.location.href = "http://localhost:8080";
-                //window.location.href = "http://strumbot.c100.hasura.me";
+                //window.location.href = "http://localhost:8080";
+                window.location.href = "http://strumbot.c100.hasura.me";
             }
             else if(request.status===500){
                 alert('Something went wrong on the server');
@@ -140,27 +147,14 @@ $(document).ready(function(){
 	});
 
 	$("#write").click(function(e){
-	window.location.href = "http://localhost:8080/write";;
-	});
-
-	$("#notes").click(function(e){
-
-	//window.location.href = "http://localhost:8080/notes";
-	window.location.href = "http://strumbot.c100.hasura.me/notes";
-
-	});
-
-	$("#search").click(function(e){
-
-	//window.location.href = "http://localhost:8080/search";
-	window.location.href = "http://strumbot.c100.hasura.me/search";
-
+	//window.location.href = "http://localhost:8080/write";
+	window.location.href = "http://strumbot.c100.hasura.me/write";
 	});
 
 	$("#dash").click(function(e){
 
-	window.location.href = "http://localhost:8080/dashboard";
-	//window.location.href = "http://strumbot.c100.hasura.me/search";
+	//window.location.href = "http://localhost:8080/dashboard";
+	window.location.href = "http://strumbot.c100.hasura.me/dashboard";
 
 	});
 

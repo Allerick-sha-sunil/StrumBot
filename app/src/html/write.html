@@ -66,15 +66,25 @@
             <nav class="navbar pull-right" role="navigation">
             <form class="navbar-form" role="search">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                <input id="search_text" type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
                   <div class="input-group-btn">
-                    <button id="search" class="btn btn-default" type="submit" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
+                    <button id="search" class="btn btn-default" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
                   </div>
                 </div>
             </form>
             </nav>
           </div>
           </div>
+
+          <script>
+            $("#search").click(function(e){
+              e.preventDefault();
+              var temp=$("#search_text").val();
+              localStorage.setItem('search_text',temp);
+              //window.location.href = "http://localhost:8080/search";
+              window.location.href = "http://strumbot.c100.hasura.me/search";
+            });
+          </script>
 
           <div class="col-md-1" style="padding-top: 7px;">
             <nav class="navbar pull-right" role="navigation">
@@ -115,7 +125,7 @@
               <input type="link" placeholder="Youtube link to song or a played piece" class="form-control input-lg" class="form-control" id="link">
             </div>
             <div style="padding-bottom: 20px">
-              <button id="post" class="btn btn-primary btn-block btn-lg" tabindex="7">Post</button>
+              <button type="submit" id="post" class="btn btn-primary btn-block btn-lg" tabindex="7">Post</button>
             </div>
           </form>
           <p> Make your notes understandable by adding lyrics to them. Look at this for reference. Remember that good notes get good Ratings!</p>
@@ -126,9 +136,7 @@
       <script type="text/javascript" src="/js/index.js"></script>
       <script>
       $("#post").click(function(e){
-      alert("Please Fill All Required Field");
-      return false;
-      }
+        e.preventDefault();
         var notes = CKEDITOR.instances.editor1.getData();
         $.ajax({
             url: 'http://data.c100.hasura.me/v1/query',
@@ -148,17 +156,21 @@
                       "name": $("#name").val(),
                       "artist": $("#artist").val(),
                       "language": $("#lang").val(),
-                      "link": $("#link").val()
+                      "link": $("#link").val(),
+                      "rating": "0",
+                      "count":"1"
                     }
                     ]
                   }
             })
           }).done(function(data){
-              alert("Inserted");
-            
+              alert("Notes Posted!");
+              //window.location.href = "http://localhost:8080/dashboard";
+              window.location.href = "http://strumbot.c100.hasura.me/dashboard";
           }).fail(function(data) {
             alert("fail :"+JSON.parse(data.responseText).message);
           })
+
       });
     </script>
 	
