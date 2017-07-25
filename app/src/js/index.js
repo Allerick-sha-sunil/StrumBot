@@ -106,7 +106,7 @@ $(document).ready(function(){
  					localStorage.setItem('username', JSON.stringify(data.username));
  					localStorage.setItem('id', JSON.stringify(data.hasura_id));
  					//window.location.href = "http://localhost:8080/dashboard";
- 					window.location.href = "http://strumbot.c100.hasura.me/dashboard";
+ 					window.location.href = "http://strumbot.strange-quark.hasura.me/dashboard";
  				}).fail(function(data){
 			//Sign up failed
 			alert("fail :"+JSON.parse(data.responseText).message);
@@ -131,7 +131,7 @@ $(document).ready(function(){
             if(request.status ===200) {
                 //alert('Logged out successfully');
                 //window.location.href = "http://localhost:8080";
-                window.location.href = "http://strumbot.c100.hasura.me";
+                window.location.href = "http://strumbot.strange-quark.hasura.me";
             }
             else if(request.status===500){
                 alert('Something went wrong on the server');
@@ -148,13 +148,13 @@ $(document).ready(function(){
 
 	$("#write").click(function(e){
 	//window.location.href = "http://localhost:8080/write";
-	window.location.href = "http://strumbot.c100.hasura.me/write";
+	window.location.href = "http://strumbot.strange-quark.hasura.me/write";
 	});
 
 	$("#dash").click(function(e){
 
 	//window.location.href = "http://localhost:8080/dashboard";
-	window.location.href = "http://strumbot.c100.hasura.me/dashboard";
+	window.location.href = "http://strumbot.strange-quark.hasura.me/dashboard";
 
 	});
 

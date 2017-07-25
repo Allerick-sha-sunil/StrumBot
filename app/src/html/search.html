@@ -51,7 +51,7 @@
            //alert("Appending!");
            var temp2 = document.getElementById("tell");
            temp2.innerHTML="You've Searched for '"+localStorage.getItem('search_text')+"'";
-           alert(data);
+           //alert(data);
            var append_data = "";
            for (var i = 0; i<data.length; i++ ) {
            var append_data = append_data.concat('<a href=/'+data[i].id+' style="text-transform: capitalize;" class="list-group-item">'+data[i].name+'</a>'); 
@@ -126,7 +126,7 @@
               var temp=$("#search_text").val();
               localStorage.setItem('search_text',temp);
               //window.location.href = "http://localhost:8080/search";
-              window.location.href = "http://strumbot.c100.hasura.me/search";
+              window.location.href = "http://strumbot.strange-quark.hasura.me/search";
             });
           </script>
 

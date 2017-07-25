@@ -251,7 +251,7 @@ function createTemplate(a){
               var temp=$("#search_text").val();
               localStorage.setItem('search_text',temp);
               //window.location.href = "http://localhost:8080/search";
-              window.location.href = "http://strumbot.c100.hasura.me/search";
+              window.location.href = "http://strumbot.strange-quark.hasura.me/search";
             });
           </script>
 
