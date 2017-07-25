@@ -31,7 +31,7 @@ $(document).ready(function(){
 				"password": $("#password").val()
 			})
 		}).done(function(data){
-			alert("SignUp done");
+			//alert("SignUp done");
 			//to add user to profile table
 			$.ajax({
  				url: 'http://auth.c100.hasura.me/user/account/info',

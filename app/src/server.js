@@ -183,6 +183,8 @@ function createTemplate(a){
            {
            	temp1 = document.getElementById("wrap");
            	temp1.style.display='none';
+           	temp1 = document.getElementById("rate_head");
+           	temp1.style.display='none';
            	temp1 = document.getElementById("click_above");
            	temp1.style.display='none';
            	temp1 = document.getElementById("your_rating");
@@ -233,7 +235,7 @@ function createTemplate(a){
             <nav class="navbar pull-right" role="navigation">
             <form class="navbar-form" role="search">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
+                <input id="search_text" type="text" class="form-control" placeholder="Search for song notes" name="q" style="height: 45px;"/>
                   <div class="input-group-btn">
                     <button id="search" class="btn btn-default" style="height: 45px;"><i class="glyphicon glyphicon-search" style="align-self: center; padding-bottom: 14px;  position: relative; height: 25px;"></i></button>
                   </div>
@@ -281,7 +283,7 @@ function createTemplate(a){
           <p id="time"></p>
           <h4>Average Rating</h4>
           <p id="rating1"></p>
-          <h4>Your Rating</h4>
+          <h4 id="rate_head">Your Rating</h4>
           <div id = 'wrap'>
             <div id = 'stars'>
               <span id ="rating_number">Click to Rate!</span>
