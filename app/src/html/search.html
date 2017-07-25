@@ -51,6 +51,10 @@
            //alert("Appending!");
            var temp2 = document.getElementById("tell");
            temp2.innerHTML="You've Searched for '"+localStorage.getItem('search_text')+"'";
+           if(data.length!=0)
+           {
+            var temp1 = document.getElementById("fail");
+            temp1.style.display='none';
            //alert(data);
            var append_data = "";
            for (var i = 0; i<data.length; i++ ) {
@@ -58,6 +62,8 @@
            }
            var temp1 = document.getElementById("content");
            temp1.innerHTML=append_data;
+          }
+
           });
         };    
     </script>
@@ -148,6 +154,7 @@
             <h3 id="tell" style="color: #e24f43"></h3>
               <div id="content" class="list-group"></div>
           </div>
+          <p id="fail">Oops... No results found!</p>
         </div> 
 
     </div>
