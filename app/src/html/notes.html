@@ -61,7 +61,7 @@
         //localStorage.setItem('note_name','`+x+`');
         //alert(localStorage.getItem('note_name'));
         $.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),

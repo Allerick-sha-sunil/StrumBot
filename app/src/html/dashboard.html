@@ -32,7 +32,7 @@
       var id=localStorage.getItem('id');
       //alert(id);
       $.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
@@ -55,7 +55,7 @@
            temp1.innerHTML=append_data;
           });
         $.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),

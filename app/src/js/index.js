@@ -23,7 +23,7 @@ $(document).ready(function(){
 		//request to auth - SIGNUP
 		$.ajax({
 			method: "POST",
-			url: 'http://auth.c100.hasura.me/signup',
+			url: 'http://auth.strange-quark.hasura.me/signup',
 			headers:{"Content-Type" : "application/json"},
 			data: JSON.stringify({
 				"username": $("#username").val(),
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			//alert("SignUp done");
 			//to add user to profile table
 			$.ajax({
- 				url: 'http://auth.c100.hasura.me/user/account/info',
+ 				url: 'http://auth.strange-quark.hasura.me/user/account/info',
  				method: 'post',
  				headers: {
  				'Authorization': 'Bearer ' + data.auth_token,
@@ -43,7 +43,7 @@ $(document).ready(function(){
  				}).done(function(data){
  					localStorage.setItem('username', JSON.stringify(data.username));
     				$.ajax({
-		 				url: 'http://data.c100.hasura.me/v1/query',
+		 				url: 'http://data.strange-quark.hasura.me/v1/query',
 		 				method: 'post',
 		 				headers: {
 		 				'Authorization': 'Bearer ' + data.auth_token,
@@ -83,7 +83,7 @@ $(document).ready(function(){
 		//ajax request to auth - LOG IN
 		$.ajax({
 			method: "POST",
-			url: 'http://auth.c100.hasura.me/login',
+			url: 'http://auth.strange-quark.hasura.me/login',
 			headers:{"Content-Type" : "application/json"},
 			data: JSON.stringify({
 				"username": $("#L_username").val(),	
@@ -96,7 +96,7 @@ $(document).ready(function(){
 			localStorage.setItem('token', JSON.stringify(data.auth_token));
 			//alert(localStorage.getItem('token'));
 			$.ajax({
- 				url: 'http://auth.c100.hasura.me/user/account/info',
+ 				url: 'http://auth.strange-quark.hasura.me/user/account/info',
  				method: 'post',
  				headers: {
  				'Authorization': 'Bearer ' + data.auth_token,
@@ -138,7 +138,7 @@ $(document).ready(function(){
             }
         }
     };
-		request.open('POST' , 'http://auth.c100.hasura.me/user/logout', true);
+		request.open('POST' , 'http://auth.strange-quark.hasura.me/user/logout', true);
 		request.setRequestHeader('Content-Type','application/json');
 		request.setRequestHeader('Authorization','Bearer '+ token);
 		request.withCredentials = true;

@@ -89,7 +89,7 @@ function createTemplate(a){
           old=old/count;
           $('#rating_number').text(cleanpercent + "/10");
           $.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
@@ -103,7 +103,7 @@ function createTemplate(a){
            })
            }).done(function(data) {
            			$.ajax({
-				           url: 'http://data.c100.hasura.me/v1/query',
+				           url: 'http://data.strange-quark.hasura.me/v1/query',
 				           method: 'post',
 				           headers: {
 				           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
@@ -128,7 +128,7 @@ function createTemplate(a){
       	var temp=localStorage.getItem('note_id');
       	//alert(temp);
       	$.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
@@ -144,7 +144,7 @@ function createTemplate(a){
            })
            }).done(function(data) {
            $.ajax({
-           url: 'http://data.c100.hasura.me/v1/query',
+           url: 'http://data.strange-quark.hasura.me/v1/query',
            method: 'post',
            headers: {
            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
