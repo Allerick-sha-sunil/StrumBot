@@ -156,7 +156,7 @@ $(document).ready(function(){
 			headers:{"Content-Type" : "application/json"},
 		}).done(function(data){
 			//goto dashboard
-			window.location.href = "http://strumbot.c100.hasura.me";
+			window.location.href = "http://strumbot.strange-quark.hasura.me";
 			
 			//Sign up failed
 			alert("done :"+JSON.parse(data.responseText).message);
