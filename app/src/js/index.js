@@ -132,6 +132,7 @@ $(document).ready(function(){
                 //alert('Logged out successfully');
                 //window.location.href = "http://localhost:8080";
                 window.location.href = "http://strumbot.strange-quark.hasura.me";
+                localStorage.setItem('token','');
             }
             else if(request.status===500){
                 alert('Something went wrong on the server');
