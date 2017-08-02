@@ -3,6 +3,20 @@
 
   <head>
 
+    <script type="text/javascript">
+    document.onreadystatechange = function(e)
+    {
+    if (document.readyState === 'complete')
+    {
+        if(localStorage.getItem('token')=='')
+        {
+          alert("Login or Signup to continue...")
+          window.location.href = "http://strumbot.strange-quark.hasura.me/";
+        }//dom is ready, window.onload fires later
+    }
+    };
+    </script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="StrumBot" content="">
@@ -32,19 +46,6 @@
     <script src="/js/respond.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script type="text/javascript">
-    document.onreadystatechange = function(e)
-    {
-    if (document.readyState === 'complete')
-    {
-        if(localStorage.getItem('token')=='')
-        {
-          alert("Login or Signup to continue...")
-          window.location.href = "http://strumbot.strange-quark.hasura.me/";
-        }//dom is ready, window.onload fires later
-    }
-    };
-    </script>
 
   </head>
 
