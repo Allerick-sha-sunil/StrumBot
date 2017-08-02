@@ -305,8 +305,6 @@ return template;
 app.get('/:notes', function (req, res) {
   var temp=req.params.notes;
   res.send(createTemplate(temp));
-}
-     
 });
 
 app.listen(8080, function () {
