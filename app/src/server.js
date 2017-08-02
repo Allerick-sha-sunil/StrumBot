@@ -13,6 +13,7 @@ app.use("/js", express.static(__dirname + '/js'));
 
 
 app.get('/', function (req, res) {
+
     res.sendFile('html/index.html',{root});
 });
 

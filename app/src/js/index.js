@@ -159,9 +159,9 @@ $(document).ready(function(){
 		}).done(function(data){
 			//goto dashboard
 			window.location.href = "http://strumbot.strange-quark.hasura.me";
-			
+			localStorage.setItem('token','');
 			//Sign up failed
-			alert("done :"+JSON.parse(data.responseText).message);
+			//alert("done :"+JSON.parse(data.responseText).message);
 		}).fail(function(data){
 
 			//Sign up failed

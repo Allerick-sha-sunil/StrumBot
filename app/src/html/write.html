@@ -32,6 +32,17 @@
     <script src="/js/respond.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type="text/javascript">
+    window.onLoad=function() {
+      alert(localStorage.getItem('token'));
+      if(localStorage.getItem('token')=='')
+        {
+          alert("Login or Signup to continue...")
+          window.location.href = "http://strumbot.strange-quark.hasura.me/";
+        }
+      // body...
+    }
+    </script>
 
   </head>
 
