@@ -10,6 +10,7 @@
   "dependencies": {
     "ajax-request": "^1.2.3",
     "express": "^4.14.0",
-    "express-ajax": "^1.0.2"
+    "express-ajax": "^1.0.2",
+    "node-localstorage": "^1.3.0"
   }
 }

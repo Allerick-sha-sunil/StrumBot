@@ -119,7 +119,7 @@ $(document).ready(function(){
 	});
 
 
-	$("#logout").click(function(e){
+	/*$("#logout").click(function(e){
 
 		e.preventDefault();
 		var token=JSON.parse(localStorage.getItem('token'));
@@ -144,6 +144,27 @@ $(document).ready(function(){
 		request.setRequestHeader('Authorization','Bearer '+ token);
 		request.withCredentials = true;
 		request.send(null);
+
+	});*/
+	$("#logout").click(function(e){
+
+		e.preventDefault();
+		var token=JSON.parse(localStorage.getItem('token'));
+		$.ajax({
+			method: "POST",
+			url: 'http://auth.strange-quark.hasura.me/user/logout',
+			headers:{"Content-Type" : "application/json"},
+		}).done(function(data){
+			//goto dashboard
+			window.location.href = "http://strumbot.c100.hasura.me";
+			
+			//Sign up failed
+			alert("done :"+JSON.parse(data.responseText).message);
+		}).fail(function(data){
+
+			//Sign up failed
+			alert("fail :"+JSON.parse(data.responseText).message);
+		});
 
 	});
 

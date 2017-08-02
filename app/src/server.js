@@ -303,10 +303,6 @@ return template;
 
 
 app.get('/:notes', function (req, res) {
-  var tem=localStorage.getItem('token');
-  alert(tem);
-  if(token!='')
-  {
   var temp=req.params.notes;
   res.send(createTemplate(temp));
 }
