@@ -37,6 +37,19 @@ function createTemplate(a){
 <html lang="en">
 
   <head>
+  	<script type="text/javascript">
+    document.onreadystatechange = function(e)
+    {
+    if (document.readyState === 'complete')
+    {
+        if(localStorage.getItem('token')=='')
+        {
+          alert("Login or Signup to continue...")
+          window.location.href = "http://strumbot.strange-quark.hasura.me/";
+        }//dom is ready, window.onload fires later
+    }
+    };
+    </script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
