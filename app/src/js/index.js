@@ -149,11 +149,13 @@ $(document).ready(function(){
 	$("#logout").click(function(e){
 
 		e.preventDefault();
-		var token=JSON.parse(localStorage.getItem('token'));
 		$.ajax({
 			method: "POST",
 			url: 'http://auth.strange-quark.hasura.me/user/logout',
-			headers:{"Content-Type" : "application/json"},
+			headers:{
+				'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+				"Content-Type" : "application/json"
+			},
 		}).done(function(data){
 			//goto dashboard
 			window.location.href = "http://strumbot.strange-quark.hasura.me";
