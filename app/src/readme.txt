@@ -1,2 +1,7 @@
---> StrumBot is a web-app that caters to song-note needs of music students. 
---> It's a community where students can read,share and rate music notes.
+A webapp to search, share and rate song notes
+
+Idea: https://codophiliablog.wordpress.com/2017/06/07/strumbot-the-idea/
+
+Prototype: https://codophiliablog.wordpress.com/2017/06/08/strumbot-prototype/
+
+Schema: https://codophiliablog.wordpress.com/2017/06/20/strumbot-data-modelling/
