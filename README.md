@@ -1,4 +1,3 @@
-#StrumBot  
 A webapp to search, share and rate song notes
 
 Demo Video: https://youtu.be/smMZIhXyQ08  
